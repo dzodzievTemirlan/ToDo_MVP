@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="ToDo_MVP" customModuleProvider="target">
+            <connections>
+                <outlet property="addTaskButton" destination="bct-uB-VTA" id="tAg-j4-bA4"/>
+                <outlet property="collectionView" destination="ncg-EC-9dP" id="rdX-sj-Gay"/>
+                <outlet property="view" destination="iN0-l3-epB" id="lOT-Ai-bcQ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ncg-EC-9dP">
+                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zc0-6c-Rga">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="W2L-TI-3Nc"/>
+                        <outlet property="delegate" destination="-1" id="QrN-6e-GON"/>
+                    </connections>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bct-uB-VTA">
+                    <rect key="frame" x="327" y="787" width="75" height="75"/>
+                    <color key="backgroundColor" red="0.38823529410000002" green="0.52156862749999999" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="75" id="jfF-rt-Nyt"/>
+                        <constraint firstAttribute="height" constant="75" id="qfx-4K-qBQ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="plus" catalog="system">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="addTaskButtonPressed:" destination="-1" eventType="touchUpInside" id="co3-bu-eHO"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ncg-EC-9dP" secondAttribute="bottom" id="Qg7-ma-xzn"/>
+                <constraint firstItem="ncg-EC-9dP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="UpF-Pb-9vi"/>
+                <constraint firstItem="ncg-EC-9dP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="bcI-ob-Z0h"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bct-uB-VTA" secondAttribute="trailingMargin" constant="20" id="gET-eV-H5o"/>
+                <constraint firstItem="ncg-EC-9dP" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="nnl-bz-OM0"/>
+                <constraint firstItem="bct-uB-VTA" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="s7l-L7-9pR"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="137.68115942028987" y="150"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
+    </resources>
+</document>

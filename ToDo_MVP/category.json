@@ -1,0 +1,38 @@
+{
+    "Category":[{
+        
+        "label" : "All",
+        "image" : "allImage"
+        
+    },
+    {
+        "label" : "Work",
+        "image" : "workImage"
+    },
+    {
+        "label" : "Travel",
+        "image" : "travelImage"
+    },
+    {
+        "label" : "Music",
+        "image" : "musicImage"
+    },
+    {
+        "label" : "Study",
+        "image" : "studyImage"
+    },
+    {
+        "label" : "Home",
+        "image" : "homeImage"
+    },
+    {
+        "label" : "Shop",
+        "image" : "shopImage"
+    },
+    {
+        "label" : "Painting",
+        "image" : "paintImage"
+    }] 
+}
+
+
