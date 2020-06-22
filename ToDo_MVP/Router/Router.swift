@@ -19,10 +19,12 @@ protocol RouterProtocol: RouterMain {
     func showAddTaskView()
     func popVC()
     func popToRoot()
+    func showPopUp()
+
 }
 
 class Router: RouterProtocol {
- 
+    
     var navigationController: UINavigationController?
     var assemblyBuilder: Builder?
     init(navigationController: UINavigationController, assemblyBuilder: Builder){
@@ -44,10 +46,10 @@ class Router: RouterProtocol {
     }
     
     func showAddTaskView() {
-         if let navigationController = navigationController{
+        if let navigationController = navigationController{
             guard let addTaskVC = assemblyBuilder?.createAddViewModule(router: self) else {return}
             navigationController.pushViewController(addTaskVC, animated: true)
-     }
+        }
     }
     
     func popToRoot() {
@@ -59,7 +61,20 @@ class Router: RouterProtocol {
         if let navigationController = navigationController{
             navigationController.popViewController(animated: true)
         }
-       }
+    }
+    
+    func showPopUp() {
+        if let navigationController = navigationController{
+            guard let datePickerVC = assemblyBuilder?.createDatePickerModule(router: self) else{return}
+            //            navigationController.isModalInPresentation = true
+            navigationController.present(datePickerVC, animated: true) {
+                let test = UIModalPresentationStyle.overCurrentContext.rawValue
+                navigationController.modalPresentationStyle = UIModalPresentationStyle(rawValue: test)!
+            }
+            
+            
+        }
+    }
     
     
     

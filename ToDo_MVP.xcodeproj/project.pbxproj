@@ -29,9 +29,10 @@
 		79E74B52249E162C008D4674 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E74B51249E162C008D4674 /* DetailPresenter.swift */; };
 		79E74B58249E1974008D4674 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E74B56249E1974008D4674 /* DetailViewController.swift */; };
 		79E74B59249E1974008D4674 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79E74B57249E1974008D4674 /* DetailViewController.xib */; };
+		79F6F85124A0CA85004933BF /* DatePickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6F85024A0CA85004933BF /* DatePickerPresenter.swift */; };
+		79F6F85624A0CAB1004933BF /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6F85424A0CAB1004933BF /* DatePickerViewController.swift */; };
+		79F6F85724A0CAB1004933BF /* DatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F6F85524A0CAB1004933BF /* DatePickerViewController.xib */; };
 		79FE8C5D249FC2D9005E5896 /* FirstStartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FE8C5C249FC2D9005E5896 /* FirstStartService.swift */; };
-		79FE8C6124A08A4E005E5896 /* DatePickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FE8C6024A08A4E005E5896 /* DatePickerPresenter.swift */; };
-		79FE8C6324A08DE9005E5896 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FE8C6224A08DE9005E5896 /* DatePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,9 +60,10 @@
 		79E74B51249E162C008D4674 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		79E74B56249E1974008D4674 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		79E74B57249E1974008D4674 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		79F6F85024A0CA85004933BF /* DatePickerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPresenter.swift; sourceTree = "<group>"; };
+		79F6F85424A0CAB1004933BF /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		79F6F85524A0CAB1004933BF /* DatePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatePickerViewController.xib; sourceTree = "<group>"; };
 		79FE8C5C249FC2D9005E5896 /* FirstStartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStartService.swift; sourceTree = "<group>"; };
-		79FE8C6024A08A4E005E5896 /* DatePickerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPresenter.swift; sourceTree = "<group>"; };
-		79FE8C6224A08DE9005E5896 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +99,12 @@
 				79E74B46249D0263008D4674 /* category.json */,
 				79448432249A8BEB00FBAB71 /* AppDelegate.swift */,
 				79448434249A8BEB00FBAB71 /* SceneDelegate.swift */,
-				79FE8C6424A08E07005E5896 /* DatePickerModule */,
 				79C01B3E249E7BA700F37670 /* Router */,
 				79E74B55249E192C008D4674 /* Builder */,
 				79E74B40249CCE54008D4674 /* MainModule */,
 				79E74B53249E18F9008D4674 /* DetailModule */,
 				79C01B43249F66A500F37670 /* AddModule */,
+				79F6F85224A0CA8B004933BF /* DatePickerModule */,
 				79E74B4A249D14DB008D4674 /* ServiceLayer */,
 				7944843E249A8BF100FBAB71 /* Assets.xcassets */,
 				79448438249A8BEB00FBAB71 /* Main.storyboard */,
@@ -227,27 +229,28 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		79FE8C6424A08E07005E5896 /* DatePickerModule */ = {
+		79F6F85224A0CA8B004933BF /* DatePickerModule */ = {
 			isa = PBXGroup;
 			children = (
-				79FE8C6624A08E20005E5896 /* View */,
-				79FE8C6524A08E16005E5896 /* Presenter */,
+				79F6F85824A0CAB7004933BF /* View */,
+				79F6F85324A0CA95004933BF /* Presenter */,
 			);
 			path = DatePickerModule;
 			sourceTree = "<group>";
 		};
-		79FE8C6524A08E16005E5896 /* Presenter */ = {
+		79F6F85324A0CA95004933BF /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				79FE8C6024A08A4E005E5896 /* DatePickerPresenter.swift */,
+				79F6F85024A0CA85004933BF /* DatePickerPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		79FE8C6624A08E20005E5896 /* View */ = {
+		79F6F85824A0CAB7004933BF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				79FE8C6224A08DE9005E5896 /* DatePickerView.swift */,
+				79F6F85424A0CAB1004933BF /* DatePickerViewController.swift */,
+				79F6F85524A0CAB1004933BF /* DatePickerViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F6F85724A0CAB1004933BF /* DatePickerViewController.xib in Resources */,
 				79448442249A8BF100FBAB71 /* LaunchScreen.storyboard in Resources */,
 				79E74B59249E1974008D4674 /* DetailViewController.xib in Resources */,
 				7944843F249A8BF100FBAB71 /* Assets.xcassets in Resources */,
@@ -351,6 +355,8 @@
 			files = (
 				79E74B58249E1974008D4674 /* DetailViewController.swift in Sources */,
 				79E74B3B249C9FC6008D4674 /* Model.swift in Sources */,
+				79F6F85624A0CAB1004933BF /* DatePickerViewController.swift in Sources */,
+				79F6F85124A0CA85004933BF /* DatePickerPresenter.swift in Sources */,
 				79E74B4D249D5A17008D4674 /* MainCollectionViewCell.swift in Sources */,
 				79C01B3D249E7B9C00F37670 /* Router.swift in Sources */,
 				79E74B49249D14C8008D4674 /* ParseService.swift in Sources */,
@@ -358,10 +364,8 @@
 				79C01B46249F671100F37670 /* AddPresenter.swift in Sources */,
 				79E74B3D249CA035008D4674 /* MainPresenter.swift in Sources */,
 				79448437249A8BEB00FBAB71 /* MainViewController.swift in Sources */,
-				79FE8C6124A08A4E005E5896 /* DatePickerPresenter.swift in Sources */,
 				79FE8C5D249FC2D9005E5896 /* FirstStartService.swift in Sources */,
 				7944843D249A8BEB00FBAB71 /* ToDo_MVP.xcdatamodeld in Sources */,
-				79FE8C6324A08DE9005E5896 /* DatePickerView.swift in Sources */,
 				79448433249A8BEB00FBAB71 /* AppDelegate.swift in Sources */,
 				79E74B45249CE7FD008D4674 /* MainBuilder.swift in Sources */,
 				79C01B41249F669A00F37670 /* AddViewController.swift in Sources */,

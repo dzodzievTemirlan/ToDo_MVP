@@ -6,18 +6,25 @@
 //  Copyright © 2020 Temirlan Dzodziev. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol AddViewProtocol: class {
-    func getTaskItem(note: String?, category: String?, date: Date?)
+    func showDate()
+    
 }
-protocol AddViewPresenterProtocol: class {
+
+protocol getDateDelegate: class {
+    func getData(date: Date)
+}
+
+
+protocol AddViewPresenterProtocol: getDateDelegate {
     init(view: AddViewProtocol, router: RouterProtocol)
-    func getTaskItem()
-    func tap()
+    func showPopUp()
 }
 
 class AddPresenter: AddViewPresenterProtocol{
+
     weak var view: AddViewProtocol?
     var router: RouterProtocol?
     var note: String?
@@ -27,14 +34,21 @@ class AddPresenter: AddViewPresenterProtocol{
     required init(view: AddViewProtocol, router: RouterProtocol) {
         self.view = view
         self.router = router
+    }
+    
+    func getData(date: Date) {
         
+        let currentDate = date
+        let dateFormater = DateFormatter()
+        dateFormater.timeZone = TimeZone(abbreviation: "MSK")
+        dateFormater.locale = NSLocale.current
+        dateFormater.dateFormat = "dd MMMM HH:mm"
+        let strDate = dateFormater.string(from: currentDate)
+        print(strDate)
     }
     
-    func getTaskItem() {
-        self.view?.getTaskItem(note: note, category: category, date: date)
+    func showPopUp() {
+        router?.showPopUp()
     }
     
-    func tap() {
-        router?.popVC()
-    }
 }

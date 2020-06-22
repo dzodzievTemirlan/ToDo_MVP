@@ -13,7 +13,7 @@ class AddViewController: UIViewController {
     @IBOutlet weak var addDateButton: UIButton!
     @IBOutlet weak var addCategory: UIButton!
     
-    var presenter: AddViewPresenterProtocol?
+    var presenter: AddViewPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,15 +23,20 @@ class AddViewController: UIViewController {
     }
     
     @IBAction func addDateButtonPressed(_ sender: UIButton) {
-        
+        presenter.showPopUp()
     }
     
     @IBAction func addCategoryButtonPressed(_ sender: Any) {
         
     }
 }
+
 extension AddViewController: AddViewProtocol{
-    func getTaskItem(note: String?, category: String?, date: Date?) {
+
+    func showDate() {
         
+    
     }
+    
+    
 }

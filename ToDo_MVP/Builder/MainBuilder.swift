@@ -12,17 +12,17 @@ protocol Builder {
     func createMainModule(router: RouterProtocol) -> UIViewController
     func createDetailModule(title: String?, image: String?, router: RouterProtocol) -> UIViewController
     func createAddViewModule(router: RouterProtocol) -> UIViewController
-    func showPopUP(router: RouterProtocol) -> UIView
+    func createDatePickerModule(router: RouterProtocol) -> UIViewController
 }
 
 class ModelBuilder: Builder{
-    func showPopUP(router: RouterProtocol) -> UIView {
-        let view = DatePickerView()
+    
+    func createDatePickerModule(router: RouterProtocol) -> UIViewController {
+        let view = DatePickerViewController()
         let presenter = DatePickerPresenter(view: view, router: router)
+        view.presenter = presenter
+        return view
     }
-    
-   
-    
     
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let view = MainViewController()
@@ -49,6 +49,7 @@ class ModelBuilder: Builder{
         return view
     }
     
+
     
     
     
