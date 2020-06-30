@@ -10,13 +10,13 @@ import Foundation
 
 protocol FirstStartProtocol{
     func firstStart(categoryList: CategoryList?)
-    init(coreDataService: SaveCategoriesProtocol)
+    init(coreDataService: CoreDataServiceProtocol)
 }
 
 class FirstStartService:FirstStartProtocol{
-    var coreDataService: SaveCategoriesProtocol?
+    var coreDataService: CoreDataServiceProtocol?
     
-    required init(coreDataService: SaveCategoriesProtocol) {
+    required init(coreDataService: CoreDataServiceProtocol) {
         self.coreDataService = coreDataService
     }
     func firstStart(categoryList: CategoryList?) {

@@ -68,8 +68,9 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Px3-ud-ZWc">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="64.5"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySk-ab-zTB">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="171" height="64.5"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySk-ab-zTB">
+                                                                    <rect key="frame" x="28" y="0.0" width="278" height="64.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                     <color key="tintColor" red="0.38823529410000002" green="0.52156862749999999" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
@@ -83,17 +84,18 @@
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <constraints>
-                                                                <constraint firstItem="ySk-ab-zTB" firstAttribute="leading" secondItem="Px3-ud-ZWc" secondAttribute="leading" id="5b4-JL-grD"/>
+                                                                <constraint firstItem="ySk-ab-zTB" firstAttribute="leading" secondItem="Px3-ud-ZWc" secondAttribute="leadingMargin" constant="20" id="5b4-JL-grD"/>
                                                                 <constraint firstItem="ySk-ab-zTB" firstAttribute="top" secondItem="Px3-ud-ZWc" secondAttribute="top" id="bcm-Q6-ZrS"/>
                                                                 <constraint firstAttribute="bottom" secondItem="ySk-ab-zTB" secondAttribute="bottom" id="cKz-ek-bbV"/>
-                                                                <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="ySk-ab-zTB" secondAttribute="trailing" constant="235" id="dP4-wM-W93"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="ySk-ab-zTB" secondAttribute="trailing" constant="100" id="dP4-wM-W93"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TxK-b8-CQJ">
                                                             <rect key="frame" x="0.0" y="74.5" width="414" height="64"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uc8-0V-YaZ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="171" height="64"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uc8-0V-YaZ">
+                                                                    <rect key="frame" x="28" y="0.0" width="278" height="64"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                     <color key="tintColor" red="0.38823529410000002" green="0.52156862749999999" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
@@ -104,17 +106,18 @@
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <constraints>
-                                                                <constraint firstItem="uc8-0V-YaZ" firstAttribute="leading" secondItem="TxK-b8-CQJ" secondAttribute="leading" id="3ll-ML-0OX"/>
+                                                                <constraint firstItem="uc8-0V-YaZ" firstAttribute="leading" secondItem="TxK-b8-CQJ" secondAttribute="leadingMargin" constant="20" id="3ll-ML-0OX"/>
                                                                 <constraint firstAttribute="bottom" secondItem="uc8-0V-YaZ" secondAttribute="bottom" id="G4A-Ge-Yq8"/>
-                                                                <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="uc8-0V-YaZ" secondAttribute="trailing" constant="235" id="Kgg-vV-NDA"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="uc8-0V-YaZ" secondAttribute="trailing" constant="100" id="Kgg-vV-NDA"/>
                                                                 <constraint firstItem="uc8-0V-YaZ" firstAttribute="top" secondItem="TxK-b8-CQJ" secondAttribute="top" id="quA-dK-uo3"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DT-5Y-0jd">
                                                             <rect key="frame" x="0.0" y="148.5" width="414" height="64.5"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brz-y3-sWt">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="206" height="64.5"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brz-y3-sWt">
+                                                                    <rect key="frame" x="28" y="0.0" width="278" height="64.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                     <color key="tintColor" red="0.38823529410000002" green="0.52156862749999999" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
@@ -128,10 +131,10 @@
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <constraints>
-                                                                <constraint firstItem="Brz-y3-sWt" firstAttribute="leading" secondItem="4DT-5Y-0jd" secondAttribute="leading" id="Lup-9t-y1C"/>
+                                                                <constraint firstItem="Brz-y3-sWt" firstAttribute="leading" secondItem="4DT-5Y-0jd" secondAttribute="leadingMargin" constant="20" id="Lup-9t-y1C"/>
                                                                 <constraint firstItem="Brz-y3-sWt" firstAttribute="top" secondItem="4DT-5Y-0jd" secondAttribute="top" id="Rnf-1q-0B0"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Brz-y3-sWt" secondAttribute="bottom" id="wQY-gu-0WW"/>
-                                                                <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="Brz-y3-sWt" secondAttribute="trailing" constant="200" id="xPd-wT-YPv"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="Brz-y3-sWt" secondAttribute="trailing" constant="100" id="xPd-wT-YPv"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -174,6 +177,9 @@
                                                             <state key="normal" title="CREATE">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="createButtonPressed:" destination="-1" eventType="touchUpInside" id="V7W-cR-iXi"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

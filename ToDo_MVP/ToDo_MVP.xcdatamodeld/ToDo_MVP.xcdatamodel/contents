@@ -3,8 +3,16 @@
     <entity name="Categories" representedClassName="Categories" syncable="YES" codeGenerationType="class">
         <attribute name="image" optional="YES" attributeType="String"/>
         <attribute name="label" optional="YES" attributeType="String"/>
+        <relationship name="childTask" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tasks" inverseName="parentCategory" inverseEntity="Tasks"/>
+    </entity>
+    <entity name="Tasks" representedClassName="Tasks" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="done" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Categories" inverseName="childTask" inverseEntity="Categories"/>
     </entity>
     <elements>
-        <element name="Categories" positionX="-36" positionY="9" width="128" height="73"/>
+        <element name="Categories" positionX="-378.03515625" positionY="-48.3984375" width="128" height="88"/>
+        <element name="Tasks" positionX="-36" positionY="27" width="128" height="103"/>
     </elements>
 </model>

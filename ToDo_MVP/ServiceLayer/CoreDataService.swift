@@ -9,12 +9,16 @@
 import UIKit
 import CoreData
 
-protocol SaveCategoriesProtocol: class{
-    func saveCategories(categoryItem: Tasks)
+protocol CoreDataServiceProtocol: class{
+    func saveCategories(categoryItem: TasksList)
+    func fetchCategory(complition: @escaping(_ categories: [Categories]?)->Void)
+    func saveTasks(_ currentCategory: String, _ currentDesc: String,_ currentDate: Date)
+    func fetchTask(_ currentCategory: String?, complition: @escaping(_ tasks: [Tasks]?) -> Void)
+    func updateTaskCheckbox(_ ccategoryName: String, _ done: Bool, _ task: Tasks)
 }
 
-class CoreDataService: SaveCategoriesProtocol{
-    func saveCategories(categoryItem: Tasks) {
+class CoreDataService: CoreDataServiceProtocol{
+    func saveCategories(categoryItem: TasksList) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let context = appDelegate.persistentContainer.viewContext
         let categories = Categories(context: context)
@@ -26,4 +30,89 @@ class CoreDataService: SaveCategoriesProtocol{
             print("error with saving categories")
         }
     }
+    
+    
+    func fetchCategory(complition: @escaping ([Categories]?) -> Void) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let context = appDelegate.persistentContainer.viewContext
+        let request: NSFetchRequest<Categories> = Categories.fetchRequest()
+        request.returnsObjectsAsFaults = false
+        do{
+            let result = try context.fetch(request)
+            complition(result)
+            print("success")
+        }catch{
+            print("Error with fetching data")
+            complition(nil)
+        }
+    }
+    
+    func saveTasks(_ currentCategory: String, _ currentDesc: String, _ currentDate: Date) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let context = appDelegate.persistentContainer.viewContext
+        let task = Tasks(context: context)
+        
+        task.desc = currentDesc
+        task.date = currentDate
+        task.done = false
+        
+        fetchCategory { (categories) in
+            guard let unwrappedCategories = categories else {return}
+            for category in unwrappedCategories where category.label == currentCategory{
+                task.parentCategory = category
+            }
+        }
+        do{
+            try context.save()
+        }catch{
+            print("Error with saving tasks")
+        }
+    }
+    
+    func fetchTask(_ currentCategory: String?, complition: @escaping ([Tasks]?) -> Void) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let context = appDelegate.persistentContainer.viewContext
+        guard let unwrappedCategory = currentCategory else {return}
+        
+        if unwrappedCategory == "All"{
+            let request: NSFetchRequest<Tasks> = Tasks.fetchRequest()
+            do{
+                let result = try context.fetch(request)
+                complition(result)
+            } catch {
+                print("Error with fetching data")
+            }
+        }else{
+            let request: NSFetchRequest<Tasks> = Tasks.fetchRequest()
+            request.returnsObjectsAsFaults = false
+            let predicate = NSPredicate(format: "parentCategory.label MATCHES %@", unwrappedCategory)
+            request.predicate = predicate
+            
+            do{
+                let result = try context.fetch(request)
+                complition(result)
+            }catch{
+                print("Error with fetching data")
+            }
+        }
+        
+    }
+    
+    func updateTaskCheckbox(_ categoryName: String, _ done: Bool, _ task: Tasks) {
+        fetchTask(categoryName) { (tasks) in
+            guard let taskList = tasks else{return}
+            for taskOne in taskList where taskOne == task{
+                taskOne.setValue(done, forKey: "done")
+                
+                do{
+                    try taskOne.managedObjectContext?.save()
+                }catch{
+                    print("Error save Task")
+                }
+            }
+        }
+    }
+    
+    
+    
 }

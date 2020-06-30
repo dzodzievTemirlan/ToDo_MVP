@@ -8,47 +8,54 @@
 
 import UIKit
 
-protocol AddViewProtocol: class {
-    func showDate()
+protocol AddViewProtocol: GetDateDelegate, GetCategoryForButtonDelegate{
+    func setButtonLabel(title: String?)
+}
+protocol AddViewPresenterProtocol: class {
+    init(view: AddViewProtocol, router: RouterProtocol, coreDataService: CoreDataServiceProtocol, title: String?, getCategoryForPickerDelegate: GetCategoryForPickerDelegate)
+    var categoryList: [Categories]? {get set}
+    func getCategories()
+    func saveTask(_ currentCategory: String?, currentDesc: String?, date: String?)
+    func popVC()
+    func setButtonTitle()
     
-}
-
-protocol getDateDelegate: class {
-    func getData(date: Date)
-}
-
-
-protocol AddViewPresenterProtocol: getDateDelegate {
-    init(view: AddViewProtocol, router: RouterProtocol)
-    func showPopUp()
 }
 
 class AddPresenter: AddViewPresenterProtocol{
-
     weak var view: AddViewProtocol?
     var router: RouterProtocol?
-    var note: String?
-    var category: String?
-    var date: Date?
-    
-    required init(view: AddViewProtocol, router: RouterProtocol) {
+    var coreDataService: CoreDataServiceProtocol?
+    var title: String?
+    var categoryList: [Categories]?
+    var getCategoryForPickerDelegate: GetCategoryForPickerDelegate?
+    required init(view: AddViewProtocol, router: RouterProtocol, coreDataService: CoreDataServiceProtocol, title: String?, getCategoryForPickerDelegate: GetCategoryForPickerDelegate) {
         self.view = view
         self.router = router
+        self.coreDataService = coreDataService
+        self.title = title
+        self.getCategoryForPickerDelegate = getCategoryForPickerDelegate
     }
-    
-    func getData(date: Date) {
-        
-        let currentDate = date
+    func getCategories() {
+        coreDataService?.fetchCategory { (categories) in
+            self.getCategoryForPickerDelegate?.getCategoruForPicker(categories: categories)
+        }
+    }
+    func saveTask(_ currentCategory: String?, currentDesc: String?, date: String?) {
+        guard let currentDate = date else {return}
         let dateFormater = DateFormatter()
         dateFormater.timeZone = TimeZone(abbreviation: "MSK")
         dateFormater.locale = NSLocale.current
         dateFormater.dateFormat = "dd MMMM HH:mm"
-        let strDate = dateFormater.string(from: currentDate)
-        print(strDate)
+        guard let dateCurrent = dateFormater.date(from: currentDate) else{return}
+        guard let desc = currentDesc else {return}
+        guard let category = currentCategory else {return}
+        coreDataService?.saveTasks(category, desc, dateCurrent)
     }
-    
-    func showPopUp() {
-        router?.showPopUp()
+    func popVC() {
+        router?.popVC()
+    }
+    func setButtonTitle() {
+        view?.setButtonLabel(title: title)
     }
     
 }

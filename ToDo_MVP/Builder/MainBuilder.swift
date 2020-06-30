@@ -12,18 +12,10 @@ protocol Builder {
     func createMainModule(router: RouterProtocol) -> UIViewController
     func createDetailModule(title: String?, image: String?, router: RouterProtocol) -> UIViewController
     func createAddViewModule(router: RouterProtocol) -> UIViewController
-    func createDatePickerModule(router: RouterProtocol) -> UIViewController
+    func createAddViewModuleFromOneCategory(router: RouterProtocol, title: String?) -> UIViewController
 }
 
 class ModelBuilder: Builder{
-    
-    func createDatePickerModule(router: RouterProtocol) -> UIViewController {
-        let view = DatePickerViewController()
-        let presenter = DatePickerPresenter(view: view, router: router)
-        view.presenter = presenter
-        return view
-    }
-    
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let view = MainViewController()
         let parseService = ParseService()
@@ -37,20 +29,29 @@ class ModelBuilder: Builder{
     func createDetailModule(title: String?, image: String?, router: RouterProtocol) -> UIViewController {
         let view = DetailViewController()
         let parseService = ParseService()
-        let presenter = DetailPresenter(view: view, parseJsonService: parseService, router: router, title: title, image: image)
+        let coreDataService = CoreDataService()
+        let presenter = DetailPresenter(view: view, parseJsonService: parseService, router: router, title: title, image: image, coreDataService: coreDataService)
         view.presenter = presenter
         return view
     }
     
     func createAddViewModule(router: RouterProtocol) -> UIViewController {
         let view = AddViewController()
-        let presenter = AddPresenter(view: view, router: router)
+        let coreDataService = CoreDataService()
+        var title: String?
+        let pickerView = CategoryPickerView()
+        let presenter = AddPresenter(view: view, router: router, coreDataService: coreDataService, title: title ?? "Add Category", getCategoryForPickerDelegate: pickerView)
         view.presenter = presenter
         return view
     }
-    
-
-    
+    func createAddViewModuleFromOneCategory(router: RouterProtocol, title: String?) -> UIViewController {
+        let view = AddViewController()
+        let coreDataService = CoreDataService()
+        let pickerView = CategoryPickerView()
+        let presenter = AddPresenter(view: view, router: router, coreDataService: coreDataService, title: title, getCategoryForPickerDelegate: pickerView)
+        view.presenter = presenter
+        return view
+    }
     
     
 }

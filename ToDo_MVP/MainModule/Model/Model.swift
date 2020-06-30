@@ -9,9 +9,9 @@
 import Foundation
 
 struct CategoryList: Codable{
-    let Category: [Tasks]
+    let Category: [TasksList]
 }
-struct Tasks: Codable{
+struct TasksList: Codable{
     let label: String
     let image: String
 }
