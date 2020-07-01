@@ -15,9 +15,12 @@ protocol CoreDataServiceProtocol: class{
     func saveTasks(_ currentCategory: String, _ currentDesc: String,_ currentDate: Date)
     func fetchTask(_ currentCategory: String?, complition: @escaping(_ tasks: [Tasks]?) -> Void)
     func updateTaskCheckbox(_ ccategoryName: String, _ done: Bool, _ task: Tasks)
+    func deleteTask(_ task: Tasks)
 }
 
 class CoreDataService: CoreDataServiceProtocol{
+    
+    
     func saveCategories(categoryItem: TasksList) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let context = appDelegate.persistentContainer.viewContext
@@ -40,9 +43,7 @@ class CoreDataService: CoreDataServiceProtocol{
         do{
             let result = try context.fetch(request)
             complition(result)
-            print("success")
         }catch{
-            print("Error with fetching data")
             complition(nil)
         }
     }
@@ -113,6 +114,14 @@ class CoreDataService: CoreDataServiceProtocol{
         }
     }
     
-    
-    
+    func deleteTask(_ task: Tasks) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let context = appDelegate.persistentContainer.viewContext
+        context.delete(task)
+        do{
+            try context.save()
+        }catch{
+            print("error with delete")
+        }
+    }
 }

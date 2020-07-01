@@ -20,7 +20,7 @@ class CategoryPickerView: UIView {
     
     var getCategoryDelegate: GetCategoryForButtonDelegate!
     var categoryList = [String]()
-    
+    var currentCategory = String()
     var coreDataService: CoreDataServiceProtocol!
     
     let popUpLabel: UILabel = {
@@ -85,7 +85,7 @@ class CategoryPickerView: UIView {
     }
     
     @objc func handleDismissal(){
-        getCategoryDelegate.getCategory(ccategory: UserDefaults.standard.string(forKey: "currentCategory")!)
+        getCategoryDelegate.getCategory(ccategory: currentCategory)
     }
     
 }
@@ -98,21 +98,17 @@ extension CategoryPickerView: UIPickerViewDataSource, UIPickerViewDelegate{
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        guard let count = presenter?.categoryList?.count else{return 0}
         return categoryList.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        guard let categories = presenter?.categoryList else {return "?"}
         return categoryList[row]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        guard let currentCategory = presenter?.categoryList else{return}
-//        let selectedCategory = currentCategory[row]
-//        UserDefaults.standard.set(selectedCategory, forKey: "currentCategory")
+        currentCategory = categoryList[row]
     }
     
-
+    
     
 }
 
@@ -126,6 +122,7 @@ extension CategoryPickerView: GetCategoryForPickerDelegate{
             }
             
         }
+        print(categoryList)
     }
     
 }

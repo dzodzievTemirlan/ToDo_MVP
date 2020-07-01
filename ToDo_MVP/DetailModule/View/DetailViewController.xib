@@ -12,6 +12,7 @@
                 <outlet property="addNewTaskButton" destination="4ME-5B-AgZ" id="2Di-sZ-XZf"/>
                 <outlet property="categoryImage" destination="rYx-MH-OI0" id="hpP-2d-6c1"/>
                 <outlet property="categoryTitle" destination="rEk-Jh-cI3" id="hDj-wS-qkQ"/>
+                <outlet property="headerView" destination="5ps-Ef-2X0" id="gUf-q5-xSJ"/>
                 <outlet property="tableView" destination="xLU-3L-ZTS" id="k5b-5L-pXC"/>
                 <outlet property="taskCount" destination="bBM-S5-G9w" id="hBx-7R-6Pe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -34,13 +35,13 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEk-Jh-cI3">
-                            <rect key="frame" x="33" y="212" width="81.5" height="30"/>
+                            <rect key="frame" x="33" y="212" width="69.5" height="30"/>
                             <fontDescription key="fontDescription" type="system" weight="black" pointSize="25"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 tasks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBM-S5-G9w">
-                            <rect key="frame" x="33" y="247" width="68.5" height="21.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 tasks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBM-S5-G9w">
+                            <rect key="frame" x="33" y="247" width="58.5" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -52,7 +53,6 @@
                         <constraint firstItem="bBM-S5-G9w" firstAttribute="leading" secondItem="5ps-Ef-2X0" secondAttribute="leadingMargin" constant="25" id="FbE-9s-l3h"/>
                         <constraint firstAttribute="height" constant="350" id="Hh6-zq-sz7"/>
                         <constraint firstItem="bBM-S5-G9w" firstAttribute="top" secondItem="rEk-Jh-cI3" secondAttribute="bottom" constant="5" id="Sq2-vt-dja"/>
-                        <constraint firstAttribute="width" secondItem="5ps-Ef-2X0" secondAttribute="height" multiplier="207:175" id="Tnx-xB-vNK"/>
                         <constraint firstItem="rEk-Jh-cI3" firstAttribute="leading" secondItem="5ps-Ef-2X0" secondAttribute="leadingMargin" constant="25" id="VdO-xv-gbf"/>
                         <constraint firstItem="rEk-Jh-cI3" firstAttribute="top" secondItem="rYx-MH-OI0" secondAttribute="bottom" constant="12" id="d1b-WK-z8J"/>
                         <constraint firstItem="rYx-MH-OI0" firstAttribute="leading" secondItem="5ps-Ef-2X0" secondAttribute="leadingMargin" constant="30" id="fNW-ji-jSC"/>

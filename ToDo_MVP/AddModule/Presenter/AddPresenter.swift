@@ -12,7 +12,7 @@ protocol AddViewProtocol: GetDateDelegate, GetCategoryForButtonDelegate{
     func setButtonLabel(title: String?)
 }
 protocol AddViewPresenterProtocol: class {
-    init(view: AddViewProtocol, router: RouterProtocol, coreDataService: CoreDataServiceProtocol, title: String?, getCategoryForPickerDelegate: GetCategoryForPickerDelegate)
+    init(view: AddViewProtocol, router: RouterProtocol, coreDataService: CoreDataServiceProtocol, title: String?)
     var categoryList: [Categories]? {get set}
     func getCategories()
     func saveTask(_ currentCategory: String?, currentDesc: String?, date: String?)
@@ -27,17 +27,16 @@ class AddPresenter: AddViewPresenterProtocol{
     var coreDataService: CoreDataServiceProtocol?
     var title: String?
     var categoryList: [Categories]?
-    var getCategoryForPickerDelegate: GetCategoryForPickerDelegate?
-    required init(view: AddViewProtocol, router: RouterProtocol, coreDataService: CoreDataServiceProtocol, title: String?, getCategoryForPickerDelegate: GetCategoryForPickerDelegate) {
+    required init(view: AddViewProtocol, router: RouterProtocol, coreDataService: CoreDataServiceProtocol, title: String?) {
         self.view = view
         self.router = router
         self.coreDataService = coreDataService
         self.title = title
-        self.getCategoryForPickerDelegate = getCategoryForPickerDelegate
+        getCategories()
     }
     func getCategories() {
         coreDataService?.fetchCategory { (categories) in
-            self.getCategoryForPickerDelegate?.getCategoruForPicker(categories: categories)
+            self.categoryList = categories
         }
     }
     func saveTask(_ currentCategory: String?, currentDesc: String?, date: String?) {

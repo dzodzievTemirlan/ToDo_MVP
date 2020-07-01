@@ -13,29 +13,61 @@ protocol MainViewProtocol: class {
     func failure(_ error: Error)
 }
 protocol MainViewPresenterProtocol: class {
-    init(view: MainViewProtocol,parseJsonService: ParseJsonProtocol, router: RouterProtocol, firstStartService: FirstStartProtocol)
-    func getCategories()
+    init(view: MainViewProtocol,parseJsonService: ParseJsonProtocol, router: RouterProtocol, firstStartService: FirstStartProtocol, coreDataService: CoreDataServiceProtocol)
     var categories: CategoryList? {get set}
+    var taskCount: Int? {get set}
+    var indexPath:IndexPath? {get set}
+    func getCategories()
     func tapOnTheCell(title: String?, image: String?)
     func tapOnAddTask()
-    
+    func getTaskCount(indexPath: IndexPath)// -> Int
 }
 
 
 class MainPresenter: MainViewPresenterProtocol {
-    
+    var indexPath: IndexPath?
     weak var view: MainViewProtocol?
     let parseJsonService: ParseJsonProtocol
     var categories: CategoryList?
     var router: RouterProtocol?
     var firstStartService: FirstStartProtocol?
+    var coreDataService: CoreDataServiceProtocol?
+    var taskCount: Int?
     
-    required init(view: MainViewProtocol,parseJsonService: ParseJsonProtocol, router: RouterProtocol, firstStartService: FirstStartProtocol) {
+    required init(view: MainViewProtocol,parseJsonService: ParseJsonProtocol, router: RouterProtocol, firstStartService: FirstStartProtocol, coreDataService: CoreDataServiceProtocol) {
         self.view = view
         self.parseJsonService = parseJsonService
         self.router = router
         self.firstStartService = firstStartService
+        self.coreDataService = coreDataService
         getCategories()
+//        NotificationCenter.default.addObserver(self, selector: #selector(UpdateCV), name: Notification.Name(rawValue: "com.dztemirlan.UpdateCollectionView"), object: nil)
+    }
+    
+    
+//    @objc func UpdateCV(){
+//        coreDataService?.fetchCategory(complition: { (categories) in
+//            if categories![self.indexPath!.row].label == "All"{
+//                self.coreDataService?.fetchTask("All", complition: { (tasks) in
+//                    self.taskCount = tasks?.count
+//                })
+//            }else{
+//                self.taskCount = categories![self.indexPath!.row].childTask?.count
+//            }
+//        })
+//    }
+    
+    func getTaskCount(indexPath: IndexPath){
+        coreDataService?.fetchCategory(complition: { (categories) in
+            if categories![indexPath.row].label == "All"{
+                self.coreDataService?.fetchTask("All", complition: { (tasks) in
+                    self.taskCount = tasks?.count
+                })
+            }else{
+                self.taskCount = categories![indexPath.row].childTask?.count
+            }
+        })
+        
     }
     
     func tapOnTheCell(title: String?, image: String?) {
@@ -45,6 +77,7 @@ class MainPresenter: MainViewPresenterProtocol {
     func tapOnAddTask() {
         router?.showAddTaskView()
     }
+    
     func getCategories() {
         parseJsonService.getData { [weak self] (result) in
             guard let self = self else {return}

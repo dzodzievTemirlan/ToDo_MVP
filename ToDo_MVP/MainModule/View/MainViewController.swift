@@ -30,22 +30,6 @@ class MainViewController: UIViewController {
     @IBAction func addTaskButtonPressed(_ sender: UIButton) {
         presenter.tapOnAddTask()
     }
-    
-    
-}
-
-extension MainViewController: MainViewProtocol{
-    func success() {
-        collectionView.reloadData()
-    }
-    
-    func failure(_ error: Error) {
-        let alert = UIAlertController(title: "Data doen't come", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true)
-    }
-    
 }
 
 extension MainViewController: UICollectionViewDataSource{
@@ -57,6 +41,9 @@ extension MainViewController: UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! MainCollectionViewCell
         cell.catTitle = presenter.categories?.Category[indexPath.row].label
         cell.catImage = presenter.categories?.Category[indexPath.row].image
+        presenter.getTaskCount(indexPath: indexPath)
+        presenter.indexPath = indexPath
+        cell.taskCount = presenter.taskCount
         cell.backgroundColor = .white
         cell.layer.shadowOpacity = 0.16
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: 1).cgPath
@@ -78,9 +65,7 @@ extension MainViewController: UICollectionViewDataSource{
         button.layer.shadowOpacity = 0.25
         button.layer.shadowRadius = 15
         button.layer.shadowPath = UIBezierPath(ovalIn: button.bounds).cgPath
-        
     }
-    
 }
 
 extension MainViewController: UICollectionViewDelegate{
@@ -95,5 +80,19 @@ extension MainViewController: UICollectionViewDelegate{
 extension MainViewController: UICollectionViewDelegateFlowLayout{
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: collectionView.frame.width / 2.5, height: 175)
+    }
+}
+
+
+extension MainViewController: MainViewProtocol{
+    func success() {
+        collectionView.reloadData()
+    }
+    
+    func failure(_ error: Error) {
+        let alert = UIAlertController(title: "Data doen't come", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true)
     }
 }

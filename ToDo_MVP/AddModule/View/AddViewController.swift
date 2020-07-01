@@ -13,7 +13,7 @@ class AddViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var addDateButton: UIButton!
     @IBOutlet weak var addCategory: UIButton!
-    
+    var presenter: AddViewPresenterProtocol!
     
     lazy var datePicker: DatePickerView = {
         let view = DatePickerView()
@@ -25,6 +25,7 @@ class AddViewController: UIViewController {
     lazy var categoryPicker: CategoryPickerView = {
         let view = CategoryPickerView()
         view.getCategoryDelegate = self
+        view.getCategoruForPicker(categories: presenter.categoryList )
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -37,7 +38,7 @@ class AddViewController: UIViewController {
         return view
     }()
     
-    var presenter: AddViewPresenterProtocol!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

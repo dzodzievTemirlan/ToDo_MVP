@@ -10,13 +10,13 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var categoryTitle: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var taskCount: UILabel!
     @IBOutlet weak var addNewTaskButton: UIButton!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     var presenter: DetailViewPresenterProtocol!
     
@@ -26,11 +26,8 @@ class DetailViewController: UIViewController {
         tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "Cell")
         presenter.setCategory()
         tableView.layer.cornerRadius = tableView.bounds.width / 17
-//        tableView.layer.maskedCorners = [.layerMaxXMaxYCorner]
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: Notification.Name(rawValue: "com.dztemirlan.UpdateTableView"), object: nil)
-        
-        
     }
     
     @IBAction func addNewTaskButtonPressed(_ sender: UIButton) {
@@ -58,7 +55,7 @@ extension DetailViewController: DetailViewProtocol{
     }
     
 }
-
+//MARK:-TableViewDataSource
 extension DetailViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = presenter.tasksList?.count else {return 0}
@@ -73,6 +70,8 @@ extension DetailViewController: UITableViewDataSource{
         cell.taskDescLabel.text = desc
         cell.dateLabel.text = dateToString(date: date)
         cell.checkboxButton.setImage(UIImage(named: checkboxImage(checkBox, indexPath)), for: .normal)
+        
+        taskCount.text = "\(presenter.tasksList!.count) tasks"
         cell.layer.borderColor = UIColor.white.cgColor
         return cell
     }
@@ -98,13 +97,28 @@ extension DetailViewController: UITableViewDataSource{
         }
     }
 }
+
+//MARK:-TableViewDelegate
 extension DetailViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(integerLiteral: 70)
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, complition) in
+            self.presenter.deleteTask(task: self.presenter.tasksList![indexPath.row])
+            complition(true)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "com.dztemirlan.UpdateTableView"), object: nil)
+//            NotificationCenter.default.post(name: Notification.Name(rawValue: "com.dztemirlan.UpdateCollectionView"), object: nil)
+        }
+        let swipe = UISwipeActionsConfiguration(actions: [delete])
+        return swipe
+    }
+    
+    //MARK:-Header Animation
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let headerViewMinHeight: CGFloat = presenter.height! + 56
+        
+        let headerViewMinHeight: CGFloat = presenter.height! + 100
         print(viewHeight.constant)
         let offsetY: CGFloat = scrollView.contentOffset.y
         let newHeaderViewHeight: CGFloat = viewHeight.constant - offsetY
@@ -112,6 +126,7 @@ extension DetailViewController: UITableViewDelegate{
         if newHeaderViewHeight > 350{
             navigationItem.title = ""
             viewHeight.constant = 350
+            print(newHeaderViewHeight)
             
         }else if newHeaderViewHeight < headerViewMinHeight{
             viewHeight.constant = headerViewMinHeight

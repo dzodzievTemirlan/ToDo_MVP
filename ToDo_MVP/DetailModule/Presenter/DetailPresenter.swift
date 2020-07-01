@@ -20,6 +20,7 @@ protocol  DetailViewPresenterProtocol: class{
     func addNewTask(title: String?)
     func setCategory()
     func getTask()
+    func deleteTask(task: Tasks)
 }
 
 class DetailPresenter: DetailViewPresenterProtocol{
@@ -56,6 +57,9 @@ class DetailPresenter: DetailViewPresenterProtocol{
         })
         
     }
+    func deleteTask(task: Tasks) {
+        coreDataService.deleteTask(task)
+    }
     
     func addNewTask(title: String?) {
         router?.presentAddTaskView(title: title)
@@ -68,18 +72,15 @@ class DetailPresenter: DetailViewPresenterProtocol{
     }
     
     @objc func trueUpdate(){
-//        guard let index = indexPath else {return}
+        guard let index = indexPath else {return}
         print(indexPath!)
-        coreDataService.updateTaskCheckbox(title!, true, tasksList![indexPath!.row])
+        coreDataService.updateTaskCheckbox(title!, true, tasksList![index.row])
     }
     
     @objc func falseUpdate(){
-//        guard let row = indexPath else {return}
-        coreDataService.updateTaskCheckbox(title!, false, tasksList![indexPath!.row])
+        guard let index = indexPath else {return}
+        coreDataService.updateTaskCheckbox(title!, false, tasksList![index.row])
     }
-    
-    
-    
 }
 
 

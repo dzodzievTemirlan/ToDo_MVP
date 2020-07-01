@@ -27,7 +27,6 @@ class FirstStartService:FirstStartProtocol{
             for category in categoryList!.Category.self{
                 coreDataService?.saveCategories(categoryItem: category)
             }
-            
         }
     }
 }

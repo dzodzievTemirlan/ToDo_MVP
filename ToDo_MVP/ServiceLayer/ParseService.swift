@@ -14,17 +14,15 @@ protocol ParseJsonProtocol {
 
 class ParseService: ParseJsonProtocol{
     func getData(complition: @escaping (Result<CategoryList?, Error>) -> Void) {
-         guard let path = Bundle.main.path(forResource: "category", ofType: "json") else{return}
-               let url = URL(fileURLWithPath: path)
-               do{
-                   let data = try Data(contentsOf: url)
-                   let categories = try JSONDecoder().decode(CategoryList.self, from: data)
-                complition(.success(categories))
-               }catch{
-                   print("error: \(error )")
-                complition(.failure(error))
-               }
+        guard let path = Bundle.main.path(forResource: "category", ofType: "json") else{return}
+        let url = URL(fileURLWithPath: path)
+        do{
+            let data = try Data(contentsOf: url)
+            let categories = try JSONDecoder().decode(CategoryList.self, from: data)
+            complition(.success(categories))
+        }catch{
+            print("error: \(error )")
+            complition(.failure(error))
+        }
     }
-    
-    
 }

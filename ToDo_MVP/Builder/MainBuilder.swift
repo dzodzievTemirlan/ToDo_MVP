@@ -21,7 +21,7 @@ class ModelBuilder: Builder{
         let parseService = ParseService()
         let coreDataService = CoreDataService()
         let firstStartService = FirstStartService(coreDataService: coreDataService)
-        let presenter = MainPresenter(view: view, parseJsonService: parseService, router: router, firstStartService: firstStartService )
+        let presenter = MainPresenter(view: view, parseJsonService: parseService, router: router, firstStartService: firstStartService, coreDataService: coreDataService)
         view.presenter = presenter
         return view
     }
@@ -39,16 +39,14 @@ class ModelBuilder: Builder{
         let view = AddViewController()
         let coreDataService = CoreDataService()
         var title: String?
-        let pickerView = CategoryPickerView()
-        let presenter = AddPresenter(view: view, router: router, coreDataService: coreDataService, title: title ?? "Add Category", getCategoryForPickerDelegate: pickerView)
+        let presenter = AddPresenter(view: view, router: router, coreDataService: coreDataService, title: title ?? "Add Category")
         view.presenter = presenter
         return view
     }
     func createAddViewModuleFromOneCategory(router: RouterProtocol, title: String?) -> UIViewController {
         let view = AddViewController()
         let coreDataService = CoreDataService()
-        let pickerView = CategoryPickerView()
-        let presenter = AddPresenter(view: view, router: router, coreDataService: coreDataService, title: title, getCategoryForPickerDelegate: pickerView)
+        let presenter = AddPresenter(view: view, router: router, coreDataService: coreDataService, title: title)
         view.presenter = presenter
         return view
     }

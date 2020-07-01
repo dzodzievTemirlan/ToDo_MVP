@@ -16,14 +16,18 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     var catTitle: String?
     var catImage: String?
+    var taskCount: Int?
+    
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         guard let title = catTitle else {return}
         guard let image = catImage else {return}
+        guard let count = taskCount else {return}
         categoryTitle.text = title
         categoryImage.image = UIImage(named: image)
+        countTask.text = "\(count) tasks"
         addSomeObjects()
     }
     
