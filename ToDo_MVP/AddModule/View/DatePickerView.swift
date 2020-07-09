@@ -59,6 +59,7 @@ class DatePickerView: UIView {
         datePicker.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         datePicker.topAnchor.constraint(equalTo: popUpLabel.bottomAnchor).isActive = true
         datePicker.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        datePicker.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         datePicker.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         

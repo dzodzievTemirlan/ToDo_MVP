@@ -18,9 +18,7 @@ protocol AddViewPresenterProtocol: class {
     func saveTask(_ currentCategory: String?, currentDesc: String?, date: String?)
     func popVC()
     func setButtonTitle()
-    
 }
-
 class AddPresenter: AddViewPresenterProtocol{
     weak var view: AddViewProtocol?
     var router: RouterProtocol?

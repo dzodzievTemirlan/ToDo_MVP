@@ -30,6 +30,7 @@ class ModelBuilder: Builder{
         let view = DetailViewController()
         let parseService = ParseService()
         let coreDataService = CoreDataService()
+        
         let presenter = DetailPresenter(view: view, parseJsonService: parseService, router: router, title: title, image: image, coreDataService: coreDataService)
         view.presenter = presenter
         return view

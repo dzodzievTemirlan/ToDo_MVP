@@ -25,7 +25,7 @@ class AddViewController: UIViewController {
     lazy var categoryPicker: CategoryPickerView = {
         let view = CategoryPickerView()
         view.getCategoryDelegate = self
-        view.getCategoruForPicker(categories: presenter.categoryList )
+        view.getCategoruForPicker(categories: presenter.categoryList)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -50,13 +50,27 @@ class AddViewController: UIViewController {
         visualEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         visualEffectView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         visualEffectView.alpha = 0
+        customCancelButton()
+    }
+    
+    fileprivate func customCancelButton(){
+        navigationItem.hidesBackButton = true
+        let cancelButton = UIButton(type: .system)
+        cancelButton.setImage(UIImage(named: "crossBlack")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        cancelButton.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cancelButton)
+        cancelButton.addTarget(self, action: #selector(backVC), for: .touchUpInside)
+    }
+    
+    @objc func backVC(){
+        presenter.popVC()
     }
     
     @IBAction func addDateButtonPressed(_ sender: UIButton) {
         view.addSubview(datePicker)
         datePicker.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: .zero).isActive = true
         datePicker.centerYAnchor.constraint(equalToSystemSpacingBelow: view.centerYAnchor, multiplier: .zero).isActive = true
-        datePicker.widthAnchor.constraint(equalToConstant: view.frame.width - 128).isActive = true
+        datePicker.widthAnchor.constraint(equalToConstant: view.frame.width - 120).isActive = true
         datePicker.heightAnchor.constraint(equalToConstant: view.frame.height / 3).isActive = true
         datePicker.layer.cornerRadius = 10
         datePicker.layer.masksToBounds = true
@@ -75,7 +89,7 @@ class AddViewController: UIViewController {
         view.addSubview(categoryPicker)
         categoryPicker.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: .zero).isActive = true
         categoryPicker.centerYAnchor.constraint(equalToSystemSpacingBelow: view.centerYAnchor, multiplier: .zero).isActive = true
-        categoryPicker.widthAnchor.constraint(equalToConstant: view.frame.width - 128).isActive = true
+        categoryPicker.widthAnchor.constraint(equalToConstant: view.frame.width - 120).isActive = true
         categoryPicker.heightAnchor.constraint(equalToConstant: view.frame.height / 3).isActive = true
         categoryPicker.layer.cornerRadius = 10
         categoryPicker.layer.cornerRadius = 10
@@ -120,9 +134,6 @@ extension AddViewController: AddViewProtocol{
             print("removed")
         }
     }
-    
-    
-    
     
     func getDate(date: Date) {
         let currentDate = date

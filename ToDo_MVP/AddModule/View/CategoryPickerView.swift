@@ -69,12 +69,13 @@ class CategoryPickerView: UIView {
         categoryPicker.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         categoryPicker.topAnchor.constraint(equalTo: popUpLabel.bottomAnchor).isActive = true
         categoryPicker.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        categoryPicker.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        categoryPicker.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        categoryPicker.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         
         addSubview(addButton)
         addButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        addButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        addButton.topAnchor.constraint(equalTo: categoryPicker.bottomAnchor).isActive = true
         addButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
         addButton.widthAnchor.constraint(equalToConstant: 55).isActive = true
         addButton.layer.cornerRadius = 5

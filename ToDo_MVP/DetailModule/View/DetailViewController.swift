@@ -27,7 +27,22 @@ class DetailViewController: UIViewController {
         presenter.setCategory()
         tableView.layer.cornerRadius = tableView.bounds.width / 17
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
+        customCancelButton()
         NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: Notification.Name(rawValue: "com.dztemirlan.UpdateTableView"), object: nil)
+    }
+    
+    fileprivate func customCancelButton(){
+        navigationItem.hidesBackButton = true
+        let cancelButton = UIButton(type: .system)
+        cancelButton.setImage(UIImage(named: "crossWhite")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        cancelButton.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cancelButton)
+        cancelButton.addTarget(self, action: #selector(backVC), for: .touchUpInside)
+    }
+    @objc func backVC(){
+        presenter.popVC()
+        NotificationCenter.default.post(name: Notification.Name("com.dztemirlan.UpdateCount"), object: nil)
     }
     
     @IBAction func addNewTaskButtonPressed(_ sender: UIButton) {
@@ -47,6 +62,7 @@ class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: DetailViewProtocol{
+    
     func setCategory(title: String?, image: String?) {
         guard let unwrappedTitle = title else {return}
         guard let unwrappedImage = image else {return}
@@ -54,6 +70,10 @@ extension DetailViewController: DetailViewProtocol{
         categoryImage.image = UIImage(named: "\(unwrappedImage)2")
     }
     
+    func updateCheckbox(_ bool: Bool, _ task: Tasks) {
+        presenter.updateCheckBoxButton(bool, task)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "com.dztemirlan.UpdateTableView"), object: nil)
+    }
 }
 //MARK:-TableViewDataSource
 extension DetailViewController: UITableViewDataSource{
@@ -67,16 +87,16 @@ extension DetailViewController: UITableViewDataSource{
         guard let desc = presenter.tasksList?[indexPath.row].desc else{return cell}
         guard let date = presenter.tasksList?[indexPath.row].date else {return cell}
         guard let checkBox = presenter.tasksList else {return cell}
+        cell.currentTask = presenter.tasksList?[indexPath.row]
+        cell.catName = presenter.tasksList?[indexPath.row].parentCategory?.label
         cell.taskDescLabel.text = desc
         cell.dateLabel.text = dateToString(date: date)
         cell.checkboxButton.setImage(UIImage(named: checkboxImage(checkBox, indexPath)), for: .normal)
-        
         taskCount.text = "\(presenter.tasksList!.count) tasks"
         cell.layer.borderColor = UIColor.white.cgColor
+        cell.checkBoxUpdate = self
+        cell.task = presenter.tasksList?[indexPath.row]
         return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.indexPath = indexPath
     }
     
     fileprivate func dateToString(date: Date) -> String{
@@ -109,7 +129,6 @@ extension DetailViewController: UITableViewDelegate{
             self.presenter.deleteTask(task: self.presenter.tasksList![indexPath.row])
             complition(true)
             NotificationCenter.default.post(name: Notification.Name(rawValue: "com.dztemirlan.UpdateTableView"), object: nil)
-//            NotificationCenter.default.post(name: Notification.Name(rawValue: "com.dztemirlan.UpdateCollectionView"), object: nil)
         }
         let swipe = UISwipeActionsConfiguration(actions: [delete])
         return swipe

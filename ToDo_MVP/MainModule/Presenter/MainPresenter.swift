@@ -16,7 +16,6 @@ protocol MainViewPresenterProtocol: class {
     init(view: MainViewProtocol,parseJsonService: ParseJsonProtocol, router: RouterProtocol, firstStartService: FirstStartProtocol, coreDataService: CoreDataServiceProtocol)
     var categories: CategoryList? {get set}
     var taskCount: Int? {get set}
-    var indexPath:IndexPath? {get set}
     func getCategories()
     func tapOnTheCell(title: String?, image: String?)
     func tapOnAddTask()
@@ -25,7 +24,6 @@ protocol MainViewPresenterProtocol: class {
 
 
 class MainPresenter: MainViewPresenterProtocol {
-    var indexPath: IndexPath?
     weak var view: MainViewProtocol?
     let parseJsonService: ParseJsonProtocol
     var categories: CategoryList?
@@ -41,30 +39,17 @@ class MainPresenter: MainViewPresenterProtocol {
         self.firstStartService = firstStartService
         self.coreDataService = coreDataService
         getCategories()
-//        NotificationCenter.default.addObserver(self, selector: #selector(UpdateCV), name: Notification.Name(rawValue: "com.dztemirlan.UpdateCollectionView"), object: nil)
     }
-    
-    
-//    @objc func UpdateCV(){
-//        coreDataService?.fetchCategory(complition: { (categories) in
-//            if categories![self.indexPath!.row].label == "All"{
-//                self.coreDataService?.fetchTask("All", complition: { (tasks) in
-//                    self.taskCount = tasks?.count
-//                })
-//            }else{
-//                self.taskCount = categories![self.indexPath!.row].childTask?.count
-//            }
-//        })
-//    }
     
     func getTaskCount(indexPath: IndexPath){
         coreDataService?.fetchCategory(complition: { (categories) in
-            if categories![indexPath.row].label == "All"{
+            guard let categories = categories else {return}
+            if categories[indexPath.row].label == "All"{
                 self.coreDataService?.fetchTask("All", complition: { (tasks) in
                     self.taskCount = tasks?.count
                 })
             }else{
-                self.taskCount = categories![indexPath.row].childTask?.count
+                self.taskCount = categories[indexPath.row].childTask?.count
             }
         })
         

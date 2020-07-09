@@ -8,10 +8,15 @@
 
 import UIKit
 
-let falseName = Notification.Name(rawValue: "com.dztemirlan.False")
-let trueName = Notification.Name(rawValue: "com.dztemirlan.True")
+protocol CheckBoxUpdateProtocol: class{
+    func updateCheckbox( _ bool: Bool,_ task: Tasks)
+}
 
 class DetailTableViewCell: UITableViewCell {
+    
+    var catName: String?
+    weak var checkBoxUpdate: CheckBoxUpdateProtocol?
+    var task: Tasks?
     var currentTask: Tasks?
     let taskDescLabel: UILabel = {
         let label = UILabel()
@@ -29,6 +34,7 @@ class DetailTableViewCell: UITableViewCell {
     let checkboxButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
     
@@ -49,18 +55,15 @@ class DetailTableViewCell: UITableViewCell {
         checkboxButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         checkboxButton.addTarget(self, action: #selector(checkboxUpdate), for: .touchUpInside)
         
-        
     }
     
     @objc func checkboxUpdate(){
-        
+        guard let taskOne = task else {return}
         if checkboxButton.isSelected == false{
-            NotificationCenter.default.post(name: trueName, object: self)
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "com.dztemirlan.UpdateTableView"), object: self)
+            checkBoxUpdate?.updateCheckbox(true, taskOne)
             checkboxButton.isSelected = true
         }else{
-            NotificationCenter.default.post(name: falseName, object: self)
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "com.dztemirlan.UpdateTableView"), object: self)
+            checkBoxUpdate?.updateCheckbox(false, taskOne)
             checkboxButton.isSelected = false
         }
     }

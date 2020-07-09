@@ -18,18 +18,23 @@ class MainViewController: UIViewController {
         collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: "CollectionCell")
         paddingCells()
         customizeButton(button: addTaskButton)
+        navBarCustom()
+        //        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+    }
+    
+    @IBAction func addTaskButtonPressed(_ sender: UIButton) {
+        presenter.tapOnAddTask()
+    }
+    
+    fileprivate func navBarCustom(){
         navigationItem.title = "Lists"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
-    @IBAction func addTaskButtonPressed(_ sender: UIButton) {
-        presenter.tapOnAddTask()
-    }
 }
 
 extension MainViewController: UICollectionViewDataSource{
@@ -42,7 +47,6 @@ extension MainViewController: UICollectionViewDataSource{
         cell.catTitle = presenter.categories?.Category[indexPath.row].label
         cell.catImage = presenter.categories?.Category[indexPath.row].image
         presenter.getTaskCount(indexPath: indexPath)
-        presenter.indexPath = indexPath
         cell.taskCount = presenter.taskCount
         cell.backgroundColor = .white
         cell.layer.shadowOpacity = 0.16
